@@ -130,6 +130,12 @@ export default {
           message: 'Delete Currency Success!',
           type: 'success'
         })
+      },
+      refresh: async function () {
+        const res = await axios.get('http://localhost:8080/')
+        this.currencies = res.data.currencies
+        this.request.name = undefined
+        this.request.symbol = undefined
       }
   }
 }
