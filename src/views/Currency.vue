@@ -34,19 +34,31 @@
                     <el-table-column
                             prop="id"
                             label="通貨ID"
-                            width="300"/>
+                            width="200"/>
                     <el-table-column
                             prop="name"
                             label="通貨名"
-                            width="300"/>
+                            width="200"/>
                     <el-table-column
                             prop="symbol"
                             label="通貨単位"
-                            width="300"/>
+                            width="200"/>
                     <el-table-column
                             prop="amount"
                             label="数量"
-                            width="300"/>
+                            width="200"/>
+                    <el-table-column
+                            prop="operation"
+                            label="Ops"
+                            width="200"
+                            align="left">
+                        <template slot-scope="scope">
+                            <el-button
+                                    size="mini"
+                                    type="danger"
+                                    @click="deleteCurrency(scope.row.id)">×</el-button>
+                        </template>
+                    </el-table-column>
                 </el-table>
             </el-card>
         </el-col>
@@ -81,7 +93,11 @@ export default {
     addCurrency: async function () {
       await axios.post('http://localhost:8080/', this.request)
       await this.refresh()
-    }
+    },
+    deleteCurrency: async function (id) {
+      await axios.delete('http://localhost:8080/' + id)
+      await this.refresh()
+    },
   }
 }
 </script>
