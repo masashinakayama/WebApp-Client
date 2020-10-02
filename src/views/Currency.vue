@@ -1,26 +1,41 @@
 <template>
     <el-row>
         <el-col :span="24">
-            <el-card class="box-card">
-                <el-col :span="8">
-                    <el-input
-                            v-model="request.name"
-                            placeholder="New Name..."
-                            clearable>
-                    </el-input>
-                </el-col>
-                <el-col :span="8">
-                    <el-input
-                            v-model="request.symbol"
-                            placeholder="New Symbol..."
-                            clearable>
-                    </el-input>
-                </el-col>
-                <el-col :span="8">
-                    <el-button
-                            type="success"
-                            @click="addCurrency">追加</el-button>
-                </el-col>
+            <el-card class="box-card box-card-wrapper">
+                <div slot="header">
+                    <span>新規通貨追加</span>
+                </div>
+                <el-row class="row-wrapper">
+                    <el-col :span="12">
+                        <span>新規通貨名称</span>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-input
+                                v-model="request.name"
+                                placeholder="New Name..."
+                                clearable>
+                        </el-input>
+                    </el-col>
+                </el-row>
+                <el-row class="row-wrapper">
+                    <el-col :span="12">
+                        <span>新規通貨シンボル</span>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-input
+                                v-model="request.symbol"
+                                placeholder="New Symbol..."
+                                clearable>
+                        </el-input>
+                    </el-col>
+                </el-row>
+                <el-row class="row-wrapper">
+                    <el-col :span="24">
+                        <el-button
+                                type="success"
+                                @click="addCurrency">追加</el-button>
+                    </el-col>
+                </el-row>
             </el-card>
         </el-col>
         <el-col :span="24">
@@ -102,6 +117,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    @import "../styles/base";
 </style>
