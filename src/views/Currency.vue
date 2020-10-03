@@ -1,5 +1,6 @@
 <template>
     <el-row>
+      <sub-header/>
         <el-col :span="24">
             <el-card class="box-card box-card-wrapper">
                 <div slot="header">
@@ -84,9 +85,10 @@
 /* eslint-disable no-console */
 
 import axios from 'axios'
-
+import SubHeader from '../components/SubHeader'
 export default {
   name: 'Currency',
+  components: { SubHeader },
   data () {
     return {
       request: {
@@ -100,43 +102,43 @@ export default {
     await this.refresh()
   },
   methods: {
-    refresh: async function () {
-      const res = await axios.get('http://localhost:8080/')
-      this.currencies = res.data.currencies
-      console.info(this.currencies)
-    },
+    // refresh: async function () {
+    //   const res = await axios.get('http://localhost:8080/')
+    //   this.currencies = res.data.currencies
+    //   console.info(this.currencies)
+    // },
+    // addCurrency: async function () {
+    //   await axios.post('http://localhost:8080/', this.request)
+    //   await this.refresh()
+    // },
+    // deleteCurrency: async function (id) {
+    //   await axios.delete('http://localhost:8080/' + id)
+    //   await this.refresh()
+    // },
     addCurrency: async function () {
       await axios.post('http://localhost:8080/', this.request)
       await this.refresh()
+      this.$message({
+        showClose: true,
+        message: 'Add Currency Success!',
+        type: 'success'
+      })
     },
     deleteCurrency: async function (id) {
       await axios.delete('http://localhost:8080/' + id)
       await this.refresh()
+      this.$message({
+        showClose: true,
+        message: 'Delete Currency Success!',
+        type: 'success'
+      })
     },
-    addCurrency: async function () {
-        await axios.post('http://localhost:8080/', this.request)
-        await this.refresh()
-        this.$message({
-          showClose: true,
-          message: 'Add Currency Success!',
-          type: 'success'
-        })
-      },
-      deleteCurrency: async function (id) {
-        await axios.delete('http://localhost:8080/' + id)
-        await this.refresh()
-        this.$message({
-          showClose: true,
-          message: 'Delete Currency Success!',
-          type: 'success'
-        })
-      },
-      refresh: async function () {
-        const res = await axios.get('http://localhost:8080/')
-        this.currencies = res.data.currencies
-        this.request.name = undefined
-        this.request.symbol = undefined
-      }
+    refresh: async function () {
+      const res = await axios.get('http://localhost:8080/')
+      this.currencies = res.data.currencies
+      this.request.name = undefined
+      this.request.symbol = undefined
+    }
   }
 }
 </script>
